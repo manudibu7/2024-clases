@@ -4,7 +4,7 @@
 
 - Slides: https://docs.google.com/presentation/d/14AIN-YGv-PHwYb43_bzONoRW-rx2wKZdkuMWjibukAM/edit?usp=sharing
 - Código: Acá :D.
-- Enunciado que usamos en clase para practicar: https://docs.google.com/document/d/17PExeKF6AVRWYiA0IGM6WKMS2QQgVlGwkbucYJgPVwU/edit
+- Enunciado que usamos en clase para practicar: https://docs.google.com/document/d/e/2PACX-1vRIfxqGxUsFMHgebdAdP9sUceDxWBr1w8yuF6pYlmuK3IUzqNwjne5EqjwErzq7y2cEo1DRLEVuC-rn/pub
 
 ## ¿Qué hay para la clase que viene?
 

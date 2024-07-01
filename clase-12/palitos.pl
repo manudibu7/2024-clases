@@ -41,7 +41,7 @@ leGusta(juanDS,Cual):-
     animal(Cual,_,acuatico).
 leGusta(juanDS,Cual):-
     animal(Cual,ave,_).
-leGusta(juanR,Cual).
+leGusta(juanR,_).
 leGusta(feche,lechuza).
 
 % animalDificil/1: si nadie lo tiene, o bien si una sola persona tiene uno solo.
@@ -57,11 +57,42 @@ animalDificil(UnAnimal):-
 
 
 % estaFeliz/1: si le gustan todos los animales que tiene.
-estaFeliz(Alguien):-
-    
+estaFeliz(Alguien):- %si lo tiene entonces le gusta (equivalente a: o no lo tiene o le gusta)(¬A v B == A => B)
+    tiene(Alguien, _, _),
+    forall(tiene(Alguien,Animal,_), leGusta(Alguien,Animal)).
 
+%forall(antecedente,consecuente):- "Si <antecedente>, entonces <consecuente>"
 % tieneTodosDe/2: si la persona tiene todos los animales de ese medio o clase.
+ tieneTodosDe(Persona,Medio):-
+    tiene(Persona, _, _),
+    animal(_, _, Medio),
+    forall(tiene(Persona,Animal,_), animal(Animal, _, Medio)).
+
+tieneTodosDe(Persona,Clase):-
+    tiene(Persona, _, _),
+    animal(_, Clase, _),
+    forall(tiene(Persona,Animal,_), animal(Animal, Clase, _)).  %REPITO LOGICA
+
 
 % completoLaColeccion/1: si la persona tiene todos los animales.
+completoLaColeccion(Persona):-
+    tiene(Persona, _, _), %ligo persona para que evalue siempre desde la misma persona, no ligo animal para que en cada evaluacion, evalue cada animal existente
+    forall(animal(Animal, _, _), tiene(Persona,Animal,_))
 
 % delQueMasTiene/2: si la persona tiene más de este animal que del resto.
+/*delQueMasTiene(Persona,Animal):-
+    %animal(Animal, _, _),
+    tiene(Persona, Animal, _),
+    forall(tiene(Otro,Animal,_),tieneMas(Persona,Otro,Animal)).
+
+tieneMas(Persona,Otro,Animal):-
+    tiene(Persona,Animal,UnaCantidad),
+    tiene(Otro,Animal,OtraCantidad),
+    UnaCantidad > OtraCantidad,
+    Persona \= Otro.*/
+
+delQueMasTiene(Persona,Animal):-
+    tiene(Persona,Animal,Cantidad),
+    forall( 
+        (tiene(Persona, OtroAnimal, CantidadDelOtro), Animal\=OtroAnimal) %Antecedente: Si la persona tiene otro animal distinto de Animal
+        Cantidad > CantidadDelOtro).                                      %Consecuente: La Cantidad de Animal es mayor que la del Otro

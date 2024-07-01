@@ -11,6 +11,7 @@ animal(puma,mamifero,terrestre).
 animal(abeja,insecto,aereo).
 animal(leon,mamifero,terrestre).
 animal(lagartija,reptil,terrestre).
+animal(murcielago,mamifero,aereo).
 
 /* tiene(Quien, Que, Cuantos)*/
 tiene(nico, ballena, 1).
@@ -28,9 +29,29 @@ tiene(maiu,leon,2).
 tiene(juanDS,lagartija,1).
 tiene(feche,tiburon,1).
 
-% leGusta/2
+% leGusta(Quien,Cual)
+leGusta(nico,Cual):-
+    animal(Cual,_,terrestre),
+    Cual  \= lemur.
+leGusta(maiu,abeja).
+leGusta(maiu,Cual):-
+    animal(Cual,Clase,_),
+    Clase  \= insecto.
+leGusta(juanDS,Cual):-
+    animal(Cual,_,acuatico).
+leGusta(juanDS,Cual):-
+    animal(Cual,ave,_).
+leGusta(juanR,Cual).
+leGusta(feche,lechuza).
 
 % animalDificil/1: si nadie lo tiene, o bien si una sola persona tiene uno solo.
+animalDificil(UnAnimal):-
+    not(tiene(_,UnAnimal,_)).
+animalDificil(UnAnimal):-
+    tiene(Alguien,UnAnimal,1),
+    not(tiene(Otro,UnAnimal,1)),
+    Otro \= Alguien.
+
 
 % estaFeliz/1: si le gustan todos los animales que tiene.
 

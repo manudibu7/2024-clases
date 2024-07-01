@@ -45,15 +45,20 @@ leGusta(juanR,Cual).
 leGusta(feche,lechuza).
 
 % animalDificil/1: si nadie lo tiene, o bien si una sola persona tiene uno solo.
+%nadie lo tiene
 animalDificil(UnAnimal):-
     not(tiene(_,UnAnimal,_)).
+
+%solo uno tiene uno
 animalDificil(UnAnimal):-
     tiene(Alguien,UnAnimal,1),
-    not(tiene(Otro,UnAnimal,1)),
-    Otro \= Alguien.
+    not((tiene(Otro,UnAnimal,_), %no existe otra persona que tenga al animal
+    Otro \= Alguien)).
 
 
 % estaFeliz/1: si le gustan todos los animales que tiene.
+estaFeliz(Alguien):-
+    
 
 % tieneTodosDe/2: si la persona tiene todos los animales de ese medio o clase.
 
